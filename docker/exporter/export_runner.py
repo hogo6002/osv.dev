@@ -53,8 +53,8 @@ def main():
   with concurrent.futures.ThreadPoolExecutor(
       max_workers=args.processes) as executor:
     for eco in ecosystems:
-      # Skip processing sub-directories (e.g., Debian:11)
-      if ":" in eco:
+      # Skip exporting data for child ecosystems (e.g., 'Debian:11').
+      if ':' in eco:
         continue
       executor.submit(spawn_ecosystem_exporter, args.work_dir, args.bucket, eco)
   # Upload a ZIP file containing records from all ecosystems.
